@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Шерстяной Нос — груминг-салон в Казани</title>
+  <meta name="description" content="Груминг-салон Шерстяной Нос в Казани — стрижка, мытьё, экспресс-линька и бережный уход за собаками.">
+  <style>
+    :root{
+      --ink:#1d2a23; --paper:#f3ecdf; --cream:#e7dbc8; --card:#fffaf1;
+      --accent:#b5633e; --accent2:#d49a62; --dark:#122019; --line:rgba(29,42,35,.16);
+      --shadow:0 20px 60px rgba(29,42,35,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.55}
+    img{display:block;width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .shell{width:min(1420px,90vw);margin:auto}
+    .section{padding:96px 0;scroll-margin-top:104px}
+    .kicker{font-size:14px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0}
+    h2{font-size:clamp(52px,5.2vw,84px);line-height:.98;letter-spacing:-.04em;font-weight:700}
+    p{margin:0}
+    .muted{color:#58625d}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:18px;padding:18px 28px;border-radius:999px;font-size:17px;font-weight:950;border:2px solid var(--ink);transition:.2s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-dark{background:var(--dark);color:#fff;border-color:var(--dark)}
+    .btn-light{background:transparent}
+    .header{position:fixed;z-index:50;top:0;left:0;right:0;background:rgba(243,236,223,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .header-inner{height:86px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .logo{font-size:23px;font-weight:950;letter-spacing:.03em;white-space:nowrap}
+    .logo span{font-weight:500}
+    .nav{display:flex;align-items:center;gap:28px}
+    .nav a{font-size:18px;font-weight:950;padding:12px 3px;border-bottom:3px solid transparent}
+    .nav a:hover{border-color:var(--accent)}
+    .mobile-menu{display:none;border:0;background:none;font-size:26px}
+    .hero{min-height:100vh;padding:132px 0 62px;display:grid;grid-template-columns:1.05fr .95fr;gap:5vw;align-items:center}
+    .hero-copy{padding-left:1vw}
+    .hero .kicker{margin-bottom:22px}
+    h1{font-size:clamp(72px,7.4vw,122px);line-height:.86;letter-spacing:-.055em}
+    h1 em{font-weight:500}
+    .hero-text{font-size:22px;max-width:620px;margin-top:30px;color:#4d5852}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:38px;padding-top:26px;border-top:1px solid var(--line)}
+    .hero-stats strong{display:block;font-family:Georgia,serif;font-size:34px}
+    .hero-stats span{font-size:13px;font-weight:800;color:#626a66}
+    .hero-photo{height:730px;border-radius:280px 280px 28px 28px;overflow:hidden;box-shadow:var(--shadow);position:relative;background:#ddd}
+    .hero-photo img{height:100%;object-fit:cover;object-position:center 48%}
+    .hero-card{position:absolute;left:28px;bottom:28px;background:rgba(255,250,241,.96);padding:18px 20px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
+    .hero-card b{display:block;font-size:17px}
+    .hero-card span{display:block;font-size:13px;color:#66706b;margin-top:3px}
+    .warm-strip{background:var(--accent);color:#fff;padding:15px 0;font-size:13px;font-weight:900;letter-spacing:.14em;white-space:nowrap;overflow:hidden}
+    .warm-strip div{animation:strip 26s linear infinite}
+    @keyframes strip{to{transform:translateX(-32%)}}
+    .about{background:var(--cream)}
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5vw;align-items:center}
+    .about-photo{height:570px;border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+    .about-photo img{height:100%;object-fit:cover;object-position:center}
+    .about-copy h2{max-width:850px}
+    .about-copy>p{font-size:20px;max-width:760px;margin-top:26px;color:#4f5a54}
+    .about-points{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+    .about-point{background:rgba(255,250,241,.72);padding:22px;border-radius:18px;min-height:145px}
+    .about-point b{font-size:13px;color:var(--accent)}
+    .about-point strong{display:block;font-size:18px;line-height:1.25;margin-top:34px}
+    .services{background:var(--paper)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:40px}
+    .section-head p{max-width:430px;font-size:19px;color:#58625d}
+    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .service-card{background:var(--card);border:1px solid rgba(29,42,35,.1);border-radius:22px;padding:26px;min-height:310px;display:flex;flex-direction:column;box-shadow:0 8px 25px rgba(29,42,35,.04)}
+    .service-card .num{font-size:13px;font-weight:900;color:var(--accent)}
+    .service-card h3{font-size:30px;line-height:1.02;margin-top:46px}
+    .service-card p{font-size:16px;color:#59635e;margin-top:14px}
+    .service-card strong{margin-top:auto;font-size:18px}
+    .service-banner{margin-top:16px;background:var(--dark);color:#fff;border-radius:22px;padding:26px 30px;display:flex;justify-content:space-between;align-items:center;gap:30px}
+    .service-banner strong{font-size:22px}
+    .service-banner span{font-size:15px;opacity:.75;max-width:520px}
+    .works{background:#fff8ed}
+    .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .work-card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 36px rgba(29,42,35,.08)}
+    .work-card img{height:360px;object-fit:cover}
+    .work-card:nth-child(2) img,.work-card:nth-child(5) img{height:420px}
+    .work-copy{padding:18px 20px 22px}
+    .work-copy b{font-size:20px}
+    .work-copy span{display:block;margin-top:5px;font-size:14px;color:#65706a;font-weight:700}
+    .team{background:var(--cream)}
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .team-card{background:var(--card);border-radius:22px;overflow:hidden}
+    .team-card img{height:430px;object-fit:cover;object-position:center}
+    .team-copy{padding:20px 20px 24px}
+    .team-copy h3{font-size:31px}
+    .team-copy b{display:block;font-size:16px;margin-top:6px}
+    .team-copy p{font-size:15px;color:#5f6964;margin-top:6px;font-weight:700}
+    .reviews{background:var(--dark);color:#fff}
+    .reviews .section-head p{color:#cad1cd}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .review{background:#1d2d25;border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px}
+    .stars{color:#f2ba69;font-size:19px;letter-spacing:.15em}
+    .review p{font-size:18px;line-height:1.55;margin-top:18px}
+    .review b{display:block;margin-top:24px}
+    .contacts{background:var(--paper)}
+    .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:stretch}
+    .contact-copy p{font-size:20px;max-width:600px;color:#54605a;margin-top:24px}
+    .contact-list{display:grid;gap:14px;margin-top:34px}
+    .contact-item{background:var(--card);border-radius:18px;padding:20px 22px}
+    .contact-item span{font-size:13px;color:#6e7772;font-weight:900;text-transform:uppercase;letter-spacing:.09em}
+    .contact-item strong{display:block;font-size:22px;margin-top:5px}
+    .contact-card{background:var(--accent);color:#fff;border-radius:28px;padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+    .contact-card h3{font-size:48px;line-height:1}
+    .contact-card p{font-size:17px;margin-top:18px;opacity:.85}
+    .contact-card .btn{margin-top:36px;background:#fff;color:var(--dark);border-color:#fff;align-self:flex-start}
+    .footer{background:#0d1712;color:#fff;padding:44px 0 30px}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+    .footer .logo{font-size:22px}
+    .footer small{display:block;color:#aeb8b2;margin-top:8px}
+    .developer{justify-self:end;text-align:right;background:#17261e;padding:16px 18px;border-radius:14px;min-width:340px}
+    .developer b{font-size:17px}
+    .developer span{display:block;color:#c8d0cb;font-size:15px;margin-top:5px}
+    .developer a{text-decoration:underline;text-underline-offset:3px}
+    .copyright{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:#96a29b}
+    @media(max-width:1050px){
+      .nav{display:none}.mobile-menu{display:block}
+      .hero{grid-template-columns:1fr}.hero-photo{height:580px;max-width:760px;width:100%;margin:auto}
+      .service-grid{grid-template-columns:1fr 1fr}.team-grid{grid-template-columns:1fr 1fr}
+      .works-grid{grid-template-columns:1fr 1fr}.reviews-grid{grid-template-columns:1fr}
+      .about-grid,.contact-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:650px){
+      body{font-size:16px}.shell{width:min(92vw,1420px)}.section{padding:72px 0}.header-inner{height:72px}
+      h1{font-size:58px}.hero{padding-top:105px}.hero-text{font-size:18px}.hero-photo{height:430px}
+      .hero-stats{grid-template-columns:1fr 1fr 1fr}.hero-stats strong{font-size:27px}.hero-stats span{font-size:11px}
+      h2{font-size:48px}.about-photo{height:400px}.about-points{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:18px}
+      .service-grid,.works-grid,.team-grid{grid-template-columns:1fr}.service-banner{display:block}.service-banner span{display:block;margin-top:10px}
+      .work-card img,.work-card:nth-child(2) img,.work-card:nth-child(5) img{height:330px}
+      .team-card img{height:390px}.footer-grid{grid-template-columns:1fr}.developer{justify-self:start;text-align:left;min-width:0;width:100%}
+    }
+  
+    .visit{background:#f0e5d4}
+    .visit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .visit-card{background:var(--card);border-radius:22px;padding:26px;min-height:260px;border:1px solid rgba(29,42,35,.08);display:flex;flex-direction:column}
+    .visit-card span{font-size:14px;font-weight:950;color:var(--accent)}
+    .visit-card h3{font-size:31px;margin-top:42px}
+    .visit-card p{font-size:16px;color:#5d6762;margin-top:13px}
+    .location{background:#d9cbb6}
+    .map-layout{display:grid;grid-template-columns:1.45fr .55fr;gap:18px;align-items:stretch}
+    .map-frame{min-height:610px;border-radius:28px;overflow:hidden;background:#ddd;box-shadow:var(--shadow)}
+    .map-frame img{height:100%;min-height:610px;object-fit:cover}
+    .location-card{background:var(--dark);color:#fff;border-radius:28px;padding:34px;display:flex;flex-direction:column;justify-content:space-between;gap:34px}
+    .location-label{font-size:13px;font-weight:950;letter-spacing:.15em;color:#d8a478}
+    .location-card h3{font-size:46px;line-height:1.03;margin-top:12px}
+    .location-facts{display:grid;gap:18px}
+    .location-facts div{padding-top:16px;border-top:1px solid rgba(255,255,255,.18)}
+    .location-facts b{font-size:19px;display:block}
+    .location-facts span{display:block;color:#bec8c2;font-size:14px;margin-top:3px}
+    .location-btn{background:#fff;color:var(--dark);border-color:#fff}
+    .team-card{transition:transform .25s ease,box-shadow .25s ease}
+    .team-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(29,42,35,.12)}
+    .team-card img{height:470px;object-fit:cover}
+    .team-card:nth-child(1) img{object-position:center 40%}
+    .team-card:nth-child(2) img{object-position:center 42%}
+    .team-card:nth-child(3) img{object-position:center 48%}
+    .team-card:nth-child(4) img{object-position:center 45%}
+    .team-copy h3{font-size:34px}
+    .team-copy b{font-size:17px}
+    .team-copy p{font-size:16px;line-height:1.45}
+    .work-card{transition:transform .25s ease,box-shadow .25s ease}
+    .work-card:hover{transform:translateY(-5px);box-shadow:0 18px 46px rgba(29,42,35,.14)}
+    @media(max-width:1050px){
+      .visit-grid{grid-template-columns:1fr 1fr}
+      .map-layout{grid-template-columns:1fr}
+      .map-frame,.map-frame img{min-height:480px}
+    }
+    @media(max-width:650px){
+      .visit-grid{grid-template-columns:1fr}
+      .map-frame,.map-frame img{min-height:360px}
+      .location-card h3{font-size:40px}
+    }
+
+  
+    /* финальная полировка работ */
+    .works-results{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      align-items:stretch;
+    }
+    .works-results .work-card{
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+    }
+    .works-results .work-card img,
+    .works-results .work-card:nth-child(2) img,
+    .works-results .work-card:nth-child(5) img{
+      height:390px;
+      width:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+    .works-results .work-copy{
+      min-height:100px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .works-results .work-copy b{font-size:23px}
+    .works-results .work-copy span{font-size:15px}
+
+    /* команда — крупно и с лицами */
+    .team-grid-faces{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+    .team-grid-faces .team-card img{
+      height:470px;
+      width:100%;
+      object-fit:cover;
+    }
+    .team-grid-faces .team-card:nth-child(1) img{object-position:center 42%}
+    .team-grid-faces .team-card:nth-child(2) img{object-position:center 35%}
+    .team-grid-faces .team-card:nth-child(3) img{object-position:center 36%}
+    .team-grid-faces .team-card:nth-child(4) img{object-position:center 35%}
+    .team-grid-faces .team-copy h3{font-size:34px}
+    .team-grid-faces .team-copy b{font-size:17px}
+    .team-grid-faces .team-copy p{font-size:16px;line-height:1.45}
+
+    /* живая карта вместо растянутого изображения */
+    .map-layout-live{grid-template-columns:minmax(0,1.45fr) minmax(330px,.55fr)}
+    .map-live{position:relative;min-height:590px;background:#d6d0c5}
+    .map-live iframe{display:block;width:100%;height:590px;border:0;filter:saturate(.82) contrast(.96)}
+    .map-chip{
+      position:absolute;left:24px;bottom:24px;
+      max-width:390px;padding:17px 20px;
+      border-radius:16px;background:rgba(255,250,241,.96);
+      box-shadow:0 14px 34px rgba(29,42,35,.16);
+      backdrop-filter:blur(10px);
+    }
+    .map-chip span{display:block;color:var(--accent);font-size:12px;font-weight:950;letter-spacing:.13em}
+    .map-chip strong{display:block;margin-top:5px;font-size:19px}
+    .location-card-premium{padding:38px}
+    .location-card-premium h3{font-size:45px;line-height:1.04;margin-top:10px}
+    .location-lead{font-size:16px;color:#c5cec9;margin-top:12px}
+
+    @media(max-width:1050px){
+      .works-results{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .team-grid-faces{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .map-layout-live{grid-template-columns:1fr}
+    }
+    @media(max-width:650px){
+      .works-results{grid-template-columns:1fr}
+      .works-results .work-card img,
+      .works-results .work-card:nth-child(2) img,
+      .works-results .work-card:nth-child(5) img{height:360px}
+      .team-grid-faces{grid-template-columns:1fr}
+      .team-grid-faces .team-card img{height:430px}
+      .map-live,.map-live iframe{min-height:430px;height:430px}
+      .map-chip{left:14px;right:14px;bottom:14px}
+    }
+
+  
+    /* Последняя правка команды: четыре разных мастера, акцент на лица */
+    .team-grid-faces .team-card img{
+      height:470px;
+      width:100%;
+      object-fit:cover;
+    }
+    .team-grid-faces .team-card:nth-child(1) img{object-position:56% 48%}
+    .team-grid-faces .team-card:nth-child(2) img{object-position:58% 45%}
+    .team-grid-faces .team-card:nth-child(3) img{object-position:50% 48%}
+    .team-grid-faces .team-card:nth-child(4) img{object-position:55% 45%}
+
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="shell header-inner">
+    <a class="logo" href="#top">ШЕРСТЯНОЙ <span>НОС</span></a>
+    <nav class="nav">
+      <a href="#about">О салоне</a>
+      <a href="#services">Услуги и цены</a>
+      <a href="#works">Работы</a>
+      <a href="#team">Команда</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#location">Карта</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn-light" href="#contacts">Записаться</a>
+    <button class="mobile-menu" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="shell hero">
+    <div class="hero-copy">
+      <div class="kicker">ГРУМИНГ-САЛОН · КАЗАНЬ</div>
+      <h1>Уход,<br><em>который видно.</em></h1>
+      <p class="hero-text">Спокойный груминг без конвейера: профессиональная команда, понятные цены и внимание к характеру каждого питомца.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#services">Посмотреть услуги →</a>
+        <a class="btn btn-light" href="#works">Наши работы</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>5.0</strong><span>средняя оценка</span></div>
+        <div><strong>7 лет</strong><span>опыта команды</span></div>
+        <div><strong>1200+</strong><span>довольных хвостиков</span></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="assets/hero.jpg" alt="Грумер работает с собакой">
+      <div class="hero-card"><b>Бережный подход</b><span>Один питомец — один мастер</span></div>
+    </div>
+  </section>
+
+  <div class="warm-strip"><div>КАЗАНЬ · ГРУМИНГ · УХОД · СПОКОЙСТВИЕ · СТИЛЬ · КАЗАНЬ · ГРУМИНГ · УХОД · СПОКОЙСТВИЕ · СТИЛЬ ·</div></div>
+
+  <section id="about" class="about section">
+    <div class="shell about-grid">
+      <div class="about-photo"><img src="assets/about.jpg" alt="Процесс груминга"></div>
+      <div class="about-copy">
+        <div class="kicker">01 / О САЛОНЕ</div>
+        <h2>Не просто стрижка.<br><em>Хороший день для собаки.</em></h2>
+        <p>Мы знакомимся с питомцем до начала процедуры, подбираем косметику и технику под шерсть, породу и темперамент. Наша задача — красивый результат без стресса для собаки и хозяина.</p>
+        <div class="about-points">
+          <div class="about-point"><b>01</b><strong>Без спешки и конвейера</strong></div>
+          <div class="about-point"><b>02</b><strong>Профессиональная косметика</strong></div>
+          <div class="about-point"><b>03</b><strong>Рекомендации по домашнему уходу</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services section">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="kicker">02 / УСЛУГИ И ЦЕНЫ</div><h2>Всё нужное<br><em>в одном месте.</em></h2></div>
+        <p>Не дробим услуги на повторяющиеся экраны: здесь сразу видно, что входит в процедуру и от какой цены начинается уход.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card"><span class="num">01</span><h3>Полный груминг</h3><p>Мытьё, сушка, стрижка, когти, уши и финальная укладка.</p><strong>от 2 200 ₽</strong></article>
+        <article class="service-card"><span class="num">02</span><h3>Экспресс-линька</h3><p>Глубокое вычёсывание, уход за подшёрстком и кожей.</p><strong>от 1 800 ₽</strong></article>
+        <article class="service-card"><span class="num">03</span><h3>Мытьё и сушка</h3><p>Профессиональная косметика, кондиционирование и бережная сушка.</p><strong>от 1 200 ₽</strong></article>
+        <article class="service-card"><span class="num">04</span><h3>Гигиенический уход</h3><p>Лапки, когти, уши и деликатная обработка чувствительных зон.</p><strong>от 700 ₽</strong></article>
+      </div>
+      <div class="service-banner"><strong>Точная стоимость — после знакомства с питомцем.</strong><span>Для крупных пород, сложной шерсти и первого визита администратор заранее уточнит детали и рассчитает цену.</span></div>
+    </div>
+  </section>
+
+  <section id="visit" class="visit section">
+    <div class="shell">
+      <div class="section-head">
+        <div>
+          <div class="kicker">03 / КАК ПРОХОДИТ ВИЗИТ</div>
+          <h2>Спокойно.<br><em>По шагам.</em></h2>
+        </div>
+        <p>Без конвейера и спешки. Сначала знакомимся с собакой, потом выбираем уход и только после этого начинаем процедуру.</p>
+      </div>
+      <div class="visit-grid">
+        <article class="visit-card"><span>01</span><h3>Знакомство</h3><p>Уточняем возраст, характер, привычки и прошлый опыт груминга.</p></article>
+        <article class="visit-card"><span>02</span><h3>Диагностика шерсти</h3><p>Оцениваем состояние кожи и шерсти, подбираем косметику и технику.</p></article>
+        <article class="visit-card"><span>03</span><h3>Уход</h3><p>Работаем в комфортном темпе: мытьё, сушка, стрижка и гигиена.</p></article>
+        <article class="visit-card"><span>04</span><h3>Рекомендации</h3><p>Рассказываем, как сохранить результат и ухаживать за шерстью дома.</p></article>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="works" class="works section">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">04 / НАШИ РАБОТЫ</div>
+        <h2>После груминга<br><em>виден результат.</em></h2>
+      </div>
+      <p>Здесь не процесс ради процесса, а понятный итог: аккуратная форма, чистая шерсть и ухоженный образ у разных пород.</p>
+    </div>
+
+    <div class="works-grid works-results">
+      <article class="work-card"><img src="assets/result-01.jpg" alt="Пудель после ухода"><div class="work-copy"><b>Пудель</b><span>Форма · расчёсывание · финиш</span></div></article>
+      <article class="work-card"><img src="assets/result-02.jpg" alt="Шпиц после груминга"><div class="work-copy"><b>Шпиц</b><span>Подшёрсток · окантовка</span></div></article>
+      <article class="work-card"><img src="assets/result-03.jpg" alt="Корги после ухода"><div class="work-copy"><b>Корги</b><span>Экспресс-линька · уход</span></div></article>
+      <article class="work-card"><img src="assets/result-04.jpg" alt="Йоркширский терьер после груминга"><div class="work-copy"><b>Йорк</b><span>Мордочка · лапы · гигиена</span></div></article>
+      <article class="work-card"><img src="assets/result-05.jpg" alt="Корги после груминга"><div class="work-copy"><b>Корги</b><span>Шерсть · лапы · финиш</span></div></article>
+      <article class="work-card"><img src="assets/result-06.jpg" alt="Померанский шпиц после ухода"><div class="work-copy"><b>Померанский шпиц</b><span>Объём · расчёсывание</span></div></article>
+      <article class="work-card"><img src="assets/result-07.jpg" alt="Йорк после стрижки"><div class="work-copy"><b>Йорк</b><span>Топ-нот · аккуратная форма</span></div></article>
+      <article class="work-card"><img src="assets/result-08.jpg" alt="Белый шпиц после груминга"><div class="work-copy"><b>Белый шпиц</b><span>Мытьё · сушка · объём</span></div></article>
+      <article class="work-card"><img src="assets/result-09.jpg" alt="Мальтезе после груминга"><div class="work-copy"><b>Мальтезе</b><span>Стрижка · мордочка · лапы</span></div></article>
+    </div>
+  </div>
+</section>
+
+  <section id="team" class="team section">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">05 / КОМАНДА</div>
+        <h2>Мастера,<br><em>которых узнают в лицо.</em></h2>
+      </div>
+      <p>Четыре специалиста с разным опытом и специализацией. В карточках — крупные фотографии, где хорошо видно самого мастера.</p>
+    </div>
+
+    <div class="team-grid team-grid-faces">
+      <article class="team-card">
+        <img src="assets/master-anna.jpg" alt="Грумер Анна">
+        <div class="team-copy"><h3>Анна</h3><b>Топ-грумер · 7 лет опыта</b><p>Йорки, мальтипу и декоративные породы</p></div>
+      </article>
+      <article class="team-card">
+        <img src="assets/master-maria.jpg" alt="Грумер Мария">
+        <div class="team-copy"><h3>Мария</h3><b>Грумер · 6 лет опыта</b><p>Пудели, ши-тцу и породные стрижки</p></div>
+      </article>
+      <article class="team-card">
+        <img src="assets/master-elena.jpg" alt="Грумер Елена">
+        <div class="team-copy"><h3>Елена</h3><b>Грумер · 5 лет опыта</b><p>SPA-уход и работа с чувствительными питомцами</p></div>
+      </article>
+      <article class="team-card">
+        <img src="assets/master-daria.jpg" alt="Грумер Дарья">
+        <div class="team-copy"><h3>Дарья</h3><b>Грумер · 4 года опыта</b><p>Щенячий груминг и гигиенический уход</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <section id="reviews" class="reviews section">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="kicker">06 / ОТЗЫВЫ</div><h2>Возвращаются<br><em>не только хозяева.</em></h2></div>
+        <p>В этом блоке — живые сценарии отзывов для демонстрационного проекта. При реальном запуске сюда можно подключить отзывы из карт или CRM.</p>
+      </div>
+      <div class="reviews-grid">
+        <article class="review"><div class="stars">★★★★★</div><p>«Первый раз собака вышла из салона спокойной. Стрижка аккуратная, а мастер всё объяснила по уходу дома.»</p><b>Марина и Ричи</b></article>
+        <article class="review"><div class="stars">★★★★★</div><p>«Наконец нашли место, где не торопятся. У корги после линьки шерсти дома стало заметно меньше.»</p><b>Алексей и Тоби</b></article>
+        <article class="review"><div class="stars">★★★★★</div><p>«Щенка знакомили с феном постепенно. Теперь второй визит прошёл вообще без стресса.»</p><b>Ольга и Боня</b></article>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="location" class="location section">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">07 / ГДЕ МЫ НАХОДИМСЯ</div>
+        <h2>Центр Казани.<br><em>Легко найти.</em></h2>
+      </div>
+      <p>Улица Баумана, рядом с метро «Кремлёвская». Карту можно двигать и масштабировать прямо на сайте.</p>
+    </div>
+
+    <div class="map-layout map-layout-live">
+      <div class="map-frame map-live">
+        <iframe
+          title="Карта расположения салона в Казани"
+          loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=49.1050%2C55.7890%2C49.1185%2C55.7960&amp;layer=mapnik&amp;marker=55.792344%2C49.111844">
+        </iframe>
+        <div class="map-chip">
+          <span>ШЕРСТЯНОЙ НОС</span>
+          <strong>Казань · ул. Баумана, 42</strong>
+        </div>
+      </div>
+
+      <aside class="location-card location-card-premium">
+        <div>
+          <span class="location-label">АДРЕС</span>
+          <h3>ул. Баумана, 42</h3>
+          <p class="location-lead">Вахитовский район · центр Казани</p>
+        </div>
+        <div class="location-facts">
+          <div><b>≈ 4 минуты</b><span>от метро «Кремлёвская»</span></div>
+          <div><b>09:00–21:00</b><span>работаем ежедневно</span></div>
+          <div><b>По записи</b><span>чтобы не заставлять питомца ждать</span></div>
+        </div>
+        <a class="btn location-btn" href="https://www.openstreetmap.org/?mlat=55.792344&amp;mlon=49.111844#map=17/55.792344/49.111844" target="_blank" rel="noreferrer">Открыть большую карту →</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="contacts section">
+    <div class="shell contact-grid">
+      <div class="contact-copy">
+        <div class="kicker">08 / КОНТАКТЫ</div>
+        <h2>Запись без<br><em>лишних кругов.</em></h2>
+        <p>Позвоните администратору, назовите породу, возраст и желаемую услугу — подберём время и заранее сориентируем по стоимости.</p>
+        <div class="contact-list">
+          <div class="contact-item"><span>Адрес</span><strong>Казань · ул. Баумана, 42</strong></div>
+          <div class="contact-item"><span>Режим работы</span><strong>Ежедневно · 09:00–21:00</strong></div>
+          <div class="contact-item"><span>Телефон салона</span><strong>+7 (843) 555-24-14</strong></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div><h3>Есть свободное<br>окошко?</h3><p>Администратор подскажет ближайшее время и подходящий комплекс ухода.</p></div>
+        <a class="btn" href="tel:+78435552414">Позвонить →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div><div class="logo">ШЕРСТЯНОЙ <span>НОС</span></div><small>Демонстрационный сайт груминг-салона · Казань</small></div>
+      <div class="developer">
+        <b>Разработка сайта — Кошелев Илья Вадимович</b>
+        <span>Телефон разработчика: <a href="tel:+79334294564">+7 933 429-45-64</a></span>
+        <span>Telegram: <a href="https://t.me/all_might_symbol">@all_might_symbol</a></span>
+      </div>
+    </div>
+    <div class="copyright">© 2026 «Шерстяной Нос». Концепт создан для портфолио.</div>
+  </div>
+</footer>
+
+<script>
+  const header = document.querySelector('.header');
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const target=document.querySelector(a.getAttribute('href'));
+      if(!target)return;
+      e.preventDefault();
+      const offset=(header?.offsetHeight||0)+12;
+      const y=target.getBoundingClientRect().top+window.scrollY-offset;
+      window.scrollTo({top:y,behavior:'smooth'});
+    });
+  });
+  const btn=document.querySelector('.mobile-menu');
+  const nav=document.querySelector('.nav');
+  btn?.addEventListener('click',()=>{
+    if(getComputedStyle(nav).display==='none'){
+      nav.style.display='flex';nav.style.position='absolute';nav.style.top='72px';nav.style.left='4vw';nav.style.right='4vw';
+      nav.style.flexDirection='column';nav.style.background='#f3ecdf';nav.style.padding='20px';nav.style.borderRadius='18px';nav.style.boxShadow='0 20px 40px rgba(0,0,0,.12)';
+    }else{nav.removeAttribute('style')}
+  });
+</script>
+</body>
+</html>
