@@ -669,6 +669,15 @@
       }
     }
 
+  
+    /* Верхняя кнопка записи на мобильном не нужна:
+       снизу уже есть фиксированная CTA-кнопка */
+    @media(max-width:1050px){
+      .header-inner > .btn.btn-light{
+        display:none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
