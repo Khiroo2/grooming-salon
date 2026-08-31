@@ -227,6 +227,8 @@
     .map-layout-live{grid-template-columns:minmax(0,1.45fr) minmax(330px,.55fr)}
     .map-live{position:relative;min-height:590px;background:#d6d0c5}
     .map-live iframe{display:block;width:100%;height:590px;border:0;filter:saturate(.82) contrast(.96)}
+    .map-live .map-static{display:block;width:100%;height:590px}
+    .map-live .map-static img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
     .map-chip{
       position:absolute;left:24px;bottom:24px;
       max-width:390px;padding:17px 20px;
@@ -253,6 +255,7 @@
       .team-grid-faces{grid-template-columns:1fr}
       .team-grid-faces .team-card img{height:430px}
       .map-live,.map-live iframe{min-height:430px;height:430px}
+      .map-live .map-static{height:430px}
       .map-chip{left:14px;right:14px;bottom:14px}
     }
 
@@ -556,13 +559,15 @@
       }
       .map-frame,
       .map-live,
-      .map-live iframe{
+      .map-live iframe,
+      .map-live .map-static{
         width:100%;
         max-width:100%;
         min-width:0;
       }
       .map-live,
-      .map-live iframe{
+      .map-live iframe,
+      .map-live .map-static{
         height:390px;
         min-height:390px;
       }
@@ -738,6 +743,152 @@
       .btn{-webkit-tap-highlight-color:transparent}
     }
   </style>
+
+  <style>
+    /* MAP V2 — matched to the reference post, isolated from the rest of the site */
+    .location-post{overflow:hidden;background:#d9cbb6}
+    .location-shell{width:min(1135px,calc(100% - 40px));max-width:1135px;margin-inline:auto}
+    .location-head{display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:56px;align-items:end;margin-bottom:34px}
+    .location-head h2{max-width:690px}
+    .location-head>p{max-width:345px;margin:0 0 10px;font-size:16px;line-height:1.5;color:#58625d}
+    .location-post-grid{display:grid;grid-template-columns:minmax(0,812px) minmax(0,307px);gap:16px;align-items:stretch;width:100%;max-width:100%;overflow:visible}
+    .location-map-post{display:block;min-width:0;width:100%;height:472px;border-radius:20px;overflow:hidden;background:#d8d4c9;box-shadow:0 14px 38px rgba(29,42,35,.10)}
+    .location-map-post img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;max-width:100%}
+    .location-card-post{min-width:0;width:100%;height:472px;padding:28px 28px 24px;border-radius:20px;gap:20px;overflow:hidden}
+    .location-card-post h3{font-size:40px;line-height:1.02;margin-top:12px}
+    .location-card-post .location-lead{font-size:14px;margin-top:8px}
+    .location-card-post .location-facts{gap:14px}
+    .location-card-post .location-facts div{padding-top:13px}
+    .location-card-post .location-facts b{font-size:17px}
+    .location-card-post .location-facts span{font-size:12px}
+    .location-card-post .location-btn{width:100%;min-height:64px;padding:14px 18px;font-size:15px;line-height:1.15;text-align:center;white-space:normal}
+
+    @media(max-width:1180px){
+      .location-shell{width:min(100% - 32px,1040px)}
+      .location-head{grid-template-columns:minmax(0,1fr) 300px;gap:32px}
+      .location-post-grid{grid-template-columns:minmax(0,1fr) 290px}
+      .location-map-post,.location-card-post{height:440px}
+      .location-card-post{padding:24px}
+      .location-card-post h3{font-size:36px}
+    }
+
+    @media(max-width:900px){
+      .location-shell{width:calc(100% - 28px)}
+      .location-head{display:block;margin-bottom:24px}
+      .location-head>p{max-width:620px;margin-top:16px;font-size:16px}
+      .location-post-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+      .location-map-post{height:auto;aspect-ratio:812/472;border-radius:18px}
+      .location-card-post{height:auto;min-height:0;border-radius:18px;padding:24px;gap:22px}
+      .location-card-post h3{font-size:38px}
+    }
+
+    @media(max-width:650px){
+      .location-post{padding-top:58px;padding-bottom:58px}
+      .location-shell{width:calc(100% - 24px)}
+      .location-head h2{font-size:clamp(40px,12vw,50px);line-height:.95}
+      .location-head>p{font-size:15px;line-height:1.5}
+      .location-map-post{border-radius:16px;box-shadow:none}
+      .location-card-post{padding:21px;border-radius:16px}
+      .location-card-post h3{font-size:34px}
+      .location-card-post .location-lead{font-size:13px}
+      .location-card-post .location-facts b{font-size:17px}
+      .location-card-post .location-facts span{font-size:13px}
+      .location-card-post .location-btn{min-height:54px;font-size:14px}
+    }
+  </style>
+
+
+  <style>
+    /* LIVE MAP V5 — natural interaction: drag with mouse, wheel zoom */
+    .live-map{
+      position:relative;
+      isolation:isolate;
+      overflow:hidden;
+      cursor:default;
+      user-select:none;
+      -webkit-user-select:none;
+      background:#d8d4c9;
+      /* Touch keeps vertical page scrolling native. */
+      touch-action:pan-y;
+    }
+    .live-map-tiles{position:absolute;inset:0;overflow:hidden;z-index:1;background:#d8d4c9}
+    .live-map-tiles img{
+      position:absolute;
+      width:256px;
+      height:256px;
+      max-width:none;
+      min-width:256px;
+      pointer-events:none;
+      user-select:none;
+      -webkit-user-drag:none;
+      transform-origin:0 0;
+    }
+    .live-map-marker{
+      position:absolute;
+      z-index:4;
+      width:40px;
+      height:48px;
+      margin:-44px 0 0 -20px;
+      pointer-events:none;
+      filter:drop-shadow(0 4px 5px rgba(0,0,0,.25));
+    }
+    .live-map-marker span{
+      position:absolute;
+      left:7px;
+      top:5px;
+      width:27px;
+      height:27px;
+      border-radius:50% 50% 50% 0;
+      transform:rotate(-45deg);
+      background:#89b84a;
+      border:3px solid rgba(255,255,255,.95);
+    }
+    .live-map-marker span::after{
+      content:"";
+      position:absolute;
+      width:7px;
+      height:7px;
+      left:7px;
+      top:7px;
+      border-radius:50%;
+      background:#fff;
+    }
+    .live-map-chip{
+      position:absolute;
+      z-index:5;
+      left:18px;
+      bottom:18px;
+      max-width:315px;
+      padding:14px 17px;
+      border-radius:14px;
+      background:rgba(255,250,241,.96);
+      color:#1d2a23;
+      box-shadow:0 10px 28px rgba(29,42,35,.14);
+      pointer-events:none;
+    }
+    .live-map-chip span{display:block;color:#b5633e;font-size:11px;font-weight:950;letter-spacing:.13em}
+    .live-map-chip strong{display:block;margin-top:4px;font-size:16px;line-height:1.2}
+    .live-map-attribution{
+      position:absolute;
+      z-index:5;
+      right:6px;
+      bottom:5px;
+      padding:2px 5px;
+      border-radius:4px;
+      background:rgba(255,255,255,.82);
+      color:#46504b;
+      font-size:10px;
+      line-height:1.2;
+      pointer-events:auto;
+    }
+    .live-map-attribution a{text-decoration:underline;text-underline-offset:2px}
+    @media(max-width:650px){
+      .live-map-chip{left:10px;bottom:10px;max-width:calc(100% - 20px);padding:11px 13px;border-radius:12px}
+      .live-map-chip strong{font-size:14px}
+      .live-map-attribution{font-size:9px}
+    }
+  </style>
+
 </head>
 <body>
 <header class="header">
@@ -902,9 +1053,9 @@
   </section>
 
   
-  <section id="location" class="location section">
-  <div class="shell">
-    <div class="section-head">
+  <section id="location" class="location section location-post">
+  <div class="shell location-shell">
+    <div class="section-head location-head">
       <div>
         <div class="kicker">07 / ГДЕ МЫ НАХОДИМСЯ</div>
         <h2>Центр Казани.<br><em>Легко найти.</em></h2>
@@ -912,23 +1063,19 @@
       <p>Улица Баумана, рядом с метро «Кремлёвская». Карту можно двигать и масштабировать прямо на сайте.</p>
     </div>
 
-    <div class="map-layout map-layout-live">
-      <div class="map-frame map-live">
-        <iframe
-          title="Карта расположения салона в Казани"
-          loading="lazy"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=49.1050%2C55.7890%2C49.1185%2C55.7960&amp;layer=mapnik&amp;marker=55.792344%2C49.111844">
-        </iframe>
-        <div class="map-chip">
-          <span>ШЕРСТЯНОЙ НОС</span>
-          <strong>Казань · ул. Баумана, 42</strong>
-        </div>
+    <div class="location-post-grid">
+      <div class="location-map-post live-map" id="salonMap" data-lat="55.792344" data-lon="49.111844" data-zoom="13" aria-label="Интерактивная карта центра Казани. На компьютере карту можно перетаскивать мышью и приближать или отдалять обычным колесом мыши.">
+        <div class="live-map-tiles" aria-hidden="true"></div>
+        <div class="live-map-marker" aria-hidden="true"><span></span></div>
+        <div class="live-map-chip" aria-hidden="true"><span>ШЕРСТЯНОЙ НОС</span><strong>Казань · ул. Баумана, 42</strong></div>
+        <div class="live-map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a></div>
+        <noscript><a href="https://www.openstreetmap.org/?mlat=55.792344&amp;mlon=49.111844#map=17/55.792344/49.111844" target="_blank" rel="noreferrer"><img src="assets/map-post.webp" alt="Карта центра Казани рядом с улицей Баумана" width="812" height="472"></a></noscript>
       </div>
 
-      <aside class="location-card location-card-premium">
+      <aside class="location-card location-card-post">
         <div>
           <span class="location-label">АДРЕС</span>
-          <h3>ул. Баумана, 42</h3>
+          <h3>ул. Баумана,<br>42</h3>
           <p class="location-lead">Вахитовский район · центр Казани</p>
         </div>
         <div class="location-facts">
@@ -1009,5 +1156,171 @@
     }
   });
 </script>
+
+<script>
+  // Lightweight OpenStreetMap renderer. No visible zoom buttons.
+  // Desktop: drag with the mouse and zoom with the ordinary mouse wheel.
+  // Touch: vertical page scrolling stays native.
+  (()=>{
+    const el=document.getElementById('salonMap');
+    if(!el)return;
+
+    const tilesLayer=el.querySelector('.live-map-tiles');
+    const marker=el.querySelector('.live-map-marker');
+    const markerLat=Number(el.dataset.lat)||55.792344;
+    const markerLon=Number(el.dataset.lon)||49.111844;
+    const TILE=256;
+    let zoom=Math.max(3,Math.min(18,Number(el.dataset.zoom)||13));
+    let center=null;
+    let started=false;
+    let dragging=false;
+    let pointerId=null;
+    let dragStartX=0,dragStartY=0,startCenterX=0,startCenterY=0;
+    let raf=0;
+    const tileNodes=new Map();
+
+    const project=(lat,lon,z)=>{
+      const scale=TILE*Math.pow(2,z);
+      const sin=Math.sin(lat*Math.PI/180);
+      return {
+        x:(lon+180)/360*scale,
+        y:(0.5-Math.log((1+sin)/(1-sin))/(4*Math.PI))*scale
+      };
+    };
+    const unproject=(x,y,z)=>{
+      const scale=TILE*Math.pow(2,z);
+      const lon=x/scale*360-180;
+      const n=Math.PI-2*Math.PI*y/scale;
+      const lat=180/Math.PI*Math.atan(0.5*(Math.exp(n)-Math.exp(-n)));
+      return {lat,lon};
+    };
+    const schedule=()=>{
+      if(raf)return;
+      raf=requestAnimationFrame(()=>{raf=0;render();});
+    };
+    const render=()=>{
+      if(!started||!center)return;
+      const w=el.clientWidth,h=el.clientHeight;
+      if(!w||!h)return;
+      const world=TILE*Math.pow(2,zoom);
+      center.y=Math.max(h/2,Math.min(world-h/2,center.y));
+      const left=center.x-w/2;
+      const top=center.y-h/2;
+      const minX=Math.floor(left/TILE)-1;
+      const maxX=Math.floor((left+w)/TILE)+1;
+      const minY=Math.max(0,Math.floor(top/TILE)-1);
+      const maxY=Math.min(Math.pow(2,zoom)-1,Math.floor((top+h)/TILE)+1);
+      const needed=new Set();
+      const n=Math.pow(2,zoom);
+      for(let ty=minY;ty<=maxY;ty++){
+        for(let tx=minX;tx<=maxX;tx++){
+          const wrapped=((tx%n)+n)%n;
+          const key=`${zoom}/${tx}/${ty}`;
+          needed.add(key);
+          let img=tileNodes.get(key);
+          if(!img){
+            img=new Image();
+            img.alt='';
+            img.decoding='async';
+            img.draggable=false;
+            img.src=`https://tile.openstreetmap.org/${zoom}/${wrapped}/${ty}.png`;
+            img.addEventListener('error',()=>{img.style.visibility='hidden'},{once:true});
+            tilesLayer.appendChild(img);
+            tileNodes.set(key,img);
+          }
+          img.style.transform=`translate3d(${Math.round(tx*TILE-left)}px,${Math.round(ty*TILE-top)}px,0)`;
+        }
+      }
+      for(const [key,node] of tileNodes){
+        if(!needed.has(key)){node.remove();tileNodes.delete(key)}
+      }
+      const mp=project(markerLat,markerLon,zoom);
+      marker.style.left=`${mp.x-left}px`;
+      marker.style.top=`${mp.y-top}px`;
+    };
+    const setZoom=(next)=>{
+      next=Math.max(10,Math.min(17,next));
+      if(next===zoom)return;
+      const ll=unproject(center.x,center.y,zoom);
+      zoom=next;
+      center=project(ll.lat,ll.lon,zoom);
+      for(const node of tileNodes.values())node.remove();
+      tileNodes.clear();
+      render();
+    };
+    const start=()=>{
+      if(started)return;
+      started=true;
+      center=project(markerLat,markerLon,zoom);
+      render();
+      if('ResizeObserver' in window)new ResizeObserver(schedule).observe(el);
+      else window.addEventListener('resize',schedule,{passive:true});
+    };
+
+    // Mouse/pen drag pans the map. Touch is intentionally left to the page scroll.
+    el.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='touch'||e.button!==0||e.target.closest('.live-map-attribution'))return;
+      start();
+      dragging=true;
+      pointerId=e.pointerId;
+      dragStartX=e.clientX;dragStartY=e.clientY;
+      startCenterX=center.x;startCenterY=center.y;
+      el.setPointerCapture?.(pointerId);
+    });
+    el.addEventListener('pointermove',e=>{
+      if(!dragging||e.pointerId!==pointerId)return;
+      center.x=startCenterX-(e.clientX-dragStartX);
+      center.y=startCenterY-(e.clientY-dragStartY);
+      schedule();
+    });
+    const endDrag=e=>{
+      if(!dragging||e.pointerId!==pointerId)return;
+      dragging=false;pointerId=null;
+      try{el.releasePointerCapture?.(e.pointerId)}catch(_){ }
+    };
+    el.addEventListener('pointerup',endDrag);
+    el.addEventListener('pointercancel',endDrag);
+
+    // Natural desktop map behavior: ordinary wheel zooms the map under the cursor.
+    // No Ctrl/Cmd modifier and no visible +/- controls are required.
+    let wheelLock=false;
+    el.addEventListener('wheel',e=>{
+      e.preventDefault();
+      start();
+      if(wheelLock)return;
+      wheelLock=true;
+      setTimeout(()=>{wheelLock=false},85);
+
+      const rect=el.getBoundingClientRect();
+      const px=e.clientX-rect.left;
+      const py=e.clientY-rect.top;
+      const beforeX=center.x-rect.width/2+px;
+      const beforeY=center.y-rect.height/2+py;
+      const ll=unproject(beforeX,beforeY,zoom);
+      const next=Math.max(10,Math.min(17,zoom+(e.deltaY<0?1:-1)));
+      if(next===zoom)return;
+
+      zoom=next;
+      const after=project(ll.lat,ll.lon,zoom);
+      center={
+        x:after.x-(px-rect.width/2),
+        y:after.y-(py-rect.height/2)
+      };
+      for(const node of tileNodes.values())node.remove();
+      tileNodes.clear();
+      render();
+    },{passive:false});
+
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(entries=>{
+        if(entries.some(entry=>entry.isIntersecting)){start();io.disconnect()}
+      },{rootMargin:'350px 0px'});
+      io.observe(el);
+    }else{
+      window.addEventListener('load',start,{once:true});
+    }
+  })();
+</script>
+
 </body>
 </html>
