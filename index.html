@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Шерстяной Нос — груминг-салон в Казани</title>
+  <link rel="preload" as="image" href="assets/hero.webp" imagesrcset="assets/hero-mobile.webp 900w, assets/hero.webp 1600w" imagesizes="(max-width:650px) 92vw, 48vw" fetchpriority="high">
   <meta name="description" content="Груминг-салон Шерстяной Нос в Казани — стрижка, мытьё, экспресс-линька и бережный уход за собаками.">
   <style>
     :root{
@@ -678,6 +679,64 @@
       }
     }
 
+  
+    /* ===== PERFORMANCE PASS ===== */
+    .section{
+      content-visibility:auto;
+      contain-intrinsic-size:800px;
+    }
+    #about{
+      content-visibility:visible;
+      contain-intrinsic-size:auto;
+    }
+
+    @media(max-width:650px){
+      /* На телефоне blur и большие тени дают лишнюю нагрузку на GPU */
+      .header{
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+        background:rgba(243,236,223,.985) !important;
+        box-shadow:none !important;
+      }
+      .about-photo,
+      .work-card,
+      .team-card,
+      .review,
+      .map-frame,
+      .contact-card,
+      .developer{
+        box-shadow:none !important;
+      }
+      .work-card:hover,
+      .team-card:hover,
+      .contact-item:hover{
+        transform:none !important;
+      }
+      .map-chip{
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+      }
+    }
+
+    @media(hover:none){
+      .work-card:hover img,
+      .team-card:hover img{
+        transform:none !important;
+      }
+    }
+
+  </style>
+
+  <style>
+    /* FINAL PERFORMANCE / MOBILE SAFETY — visual design unchanged */
+    picture{display:block;width:100%}
+    .hero-photo>picture,.about-photo>picture{height:100%}
+    picture>img{width:100%}
+    @media(max-width:650px){
+      .warm-strip div{animation-duration:40s}
+      .hero-photo img,.about-photo img,.work-card img,.team-card img{transform:translateZ(0)}
+      .btn{-webkit-tap-highlight-color:transparent}
+    }
   </style>
 </head>
 <body>
@@ -715,7 +774,7 @@
       </div>
     </div>
     <div class="hero-photo">
-      <img src="assets/hero.jpg" alt="Грумер работает с собакой">
+      <picture><source media="(max-width:650px)" srcset="assets/hero-mobile.webp"><img src="assets/hero.webp" alt="Грумер работает с собакой" width="1600" height="1068" fetchpriority="high" decoding="async"></picture>
       <div class="hero-card"><b>Бережный подход</b><span>Один питомец — один мастер</span></div>
     </div>
   </section>
@@ -724,7 +783,7 @@
 
   <section id="about" class="about section">
     <div class="shell about-grid">
-      <div class="about-photo"><img src="assets/about.jpg" alt="Процесс груминга"></div>
+      <div class="about-photo"><picture><source media="(max-width:650px)" srcset="assets/about-mobile.webp"><img src="assets/about.webp" alt="Процесс груминга" width="1600" height="1068" loading="lazy" decoding="async"></picture></div>
       <div class="about-copy">
         <div class="kicker">01 / О САЛОНЕ</div>
         <h2>Не просто стрижка.<br><em>Хороший день для собаки.</em></h2>
@@ -784,15 +843,15 @@
     </div>
 
     <div class="works-grid works-results">
-      <article class="work-card"><img src="assets/result-01.jpg" alt="Пудель после ухода"><div class="work-copy"><b>Пудель</b><span>Форма · расчёсывание · финиш</span></div></article>
-      <article class="work-card"><img src="assets/result-02.jpg" alt="Шпиц после груминга"><div class="work-copy"><b>Шпиц</b><span>Подшёрсток · окантовка</span></div></article>
-      <article class="work-card"><img src="assets/result-03.jpg" alt="Корги после ухода"><div class="work-copy"><b>Корги</b><span>Экспресс-линька · уход</span></div></article>
-      <article class="work-card"><img src="assets/result-04.jpg" alt="Йоркширский терьер после груминга"><div class="work-copy"><b>Йорк</b><span>Мордочка · лапы · гигиена</span></div></article>
-      <article class="work-card"><img src="assets/result-05.jpg" alt="Корги после груминга"><div class="work-copy"><b>Корги</b><span>Шерсть · лапы · финиш</span></div></article>
-      <article class="work-card"><img src="assets/result-06.jpg" alt="Померанский шпиц после ухода"><div class="work-copy"><b>Померанский шпиц</b><span>Объём · расчёсывание</span></div></article>
-      <article class="work-card"><img src="assets/result-07.jpg" alt="Йорк после стрижки"><div class="work-copy"><b>Йорк</b><span>Топ-нот · аккуратная форма</span></div></article>
-      <article class="work-card"><img src="assets/result-08.jpg" alt="Белый шпиц после груминга"><div class="work-copy"><b>Белый шпиц</b><span>Мытьё · сушка · объём</span></div></article>
-      <article class="work-card"><img src="assets/result-09.jpg" alt="Мальтезе после груминга"><div class="work-copy"><b>Мальтезе</b><span>Стрижка · мордочка · лапы</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-01-mobile.webp"><img src="assets/result-01.webp" alt="Пудель после ухода" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Пудель</b><span>Форма · расчёсывание · финиш</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-02-mobile.webp"><img src="assets/result-02.webp" alt="Шпиц после груминга" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Шпиц</b><span>Подшёрсток · окантовка</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-03-mobile.webp"><img src="assets/result-03.webp" alt="Корги после ухода" width="1012" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Корги</b><span>Экспресс-линька · уход</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-04-mobile.webp"><img src="assets/result-04.webp" alt="Йоркширский терьер после груминга" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Йорк</b><span>Мордочка · лапы · гигиена</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-05-mobile.webp"><img src="assets/result-05.webp" alt="Корги после груминга" width="1350" height="901" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Корги</b><span>Шерсть · лапы · финиш</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-06-mobile.webp"><img src="assets/result-06.webp" alt="Померанский шпиц после ухода" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Померанский шпиц</b><span>Объём · расчёсывание</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-07-mobile.webp"><img src="assets/result-07.webp" alt="Йорк после стрижки" width="1080" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Йорк</b><span>Топ-нот · аккуратная форма</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-08-mobile.webp"><img src="assets/result-08.webp" alt="Белый шпиц после груминга" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Белый шпиц</b><span>Мытьё · сушка · объём</span></div></article>
+      <article class="work-card"><picture><source media="(max-width:650px)" srcset="assets/result-09-mobile.webp"><img src="assets/result-09.webp" alt="Мальтезе после груминга" width="900" height="1350" loading="lazy" decoding="async"></picture><div class="work-copy"><b>Мальтезе</b><span>Стрижка · мордочка · лапы</span></div></article>
     </div>
   </div>
 </section>
@@ -809,19 +868,19 @@
 
     <div class="team-grid team-grid-faces">
       <article class="team-card">
-        <img src="assets/master-anna.jpg" alt="Грумер Анна">
+        <picture><source media="(max-width:650px)" srcset="assets/master-anna-mobile.webp"><img src="assets/master-anna.webp" alt="Грумер Анна" width="1085" height="1100" loading="lazy" decoding="async"></picture>
         <div class="team-copy"><h3>Анна</h3><b>Топ-грумер · 7 лет опыта</b><p>Йорки, мальтипу и декоративные породы</p></div>
       </article>
       <article class="team-card">
-        <img src="assets/master-maria.jpg" alt="Грумер Мария">
+        <picture><source media="(max-width:650px)" srcset="assets/master-maria-mobile.webp"><img src="assets/master-maria.webp" alt="Грумер Мария" width="1100" height="764" loading="lazy" decoding="async"></picture>
         <div class="team-copy"><h3>Мария</h3><b>Грумер · 6 лет опыта</b><p>Пудели, ши-тцу и породные стрижки</p></div>
       </article>
       <article class="team-card">
-        <img src="assets/master-elena.jpg" alt="Грумер Елена">
+        <picture><source media="(max-width:650px)" srcset="assets/master-elena-mobile.webp"><img src="assets/master-elena.webp" alt="Грумер Елена" width="800" height="426" loading="lazy" decoding="async"></picture>
         <div class="team-copy"><h3>Елена</h3><b>Грумер · 5 лет опыта</b><p>SPA-уход и работа с чувствительными питомцами</p></div>
       </article>
       <article class="team-card">
-        <img src="assets/master-daria.jpg" alt="Грумер Дарья">
+        <picture><source media="(max-width:650px)" srcset="assets/master-daria-mobile.webp"><img src="assets/master-daria.webp" alt="Грумер Дарья" width="1100" height="824" loading="lazy" decoding="async"></picture>
         <div class="team-copy"><h3>Дарья</h3><b>Грумер · 4 года опыта</b><p>Щенячий груминг и гигиенический уход</p></div>
       </article>
     </div>
